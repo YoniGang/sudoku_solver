@@ -134,7 +134,9 @@ class Grid:
                     i -= 1 #take a step back to get to current cell after i + 1
             i += 1 #continue to the next cell (if the current cell is valid)
             
-    
+    # =============================================================================
+    # String repr
+    # =============================================================================
     def __str__(self):
 
         final_string = '―――'*9 + '―' + '\n'
@@ -174,8 +176,8 @@ class Grid:
         
         
         
-    
-g = Grid(grid)
-print(g)
-g.solve_grid()
-print(g)
+if __name__ == '__main__':   
+    g = Grid(grid)
+    print(g)
+    g.solve_grid()
+    print(g)
