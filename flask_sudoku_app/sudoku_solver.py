@@ -50,7 +50,7 @@ class GridCell:
         return str(self.num)
     
     def __eq__(self, other):
-        return (self.row == other.row and self.col == other.col)
+        return (self.row == other.row and self.col == other.col) if other != None else False
     
 # =============================================================================
 #                        The Grid class
@@ -103,6 +103,12 @@ class Grid:
     def get_none_const_cells_indexes(self):
         return [ind for ind, cell in enumerate(self.grid_cells)
                 if not cell.is_const]
+    # =============================================================================
+    # This funtion returns list representation of the grid
+    # =============================================================================
+    def list_repr(self):
+        return [self.get_row(i) for i in range(9)]
+            
 
     # =============================================================================
     # This funtion solve the grid using backtracking algorithm
@@ -115,8 +121,9 @@ class Grid:
             #and we didnt manage to solve the board, because we returnd to
             #the first none const cell, it was 9 and still there was no solution.
             if i < 0:
-                print('The Grid is not solvable. Please try anothe one')
-                break
+                return False
+                # print('The Grid is not solvable. Please try anothe one')
+                # break
             # print(i)
             #if we are here, it means that the cell was with the value
             #of 9, and the next cell wasnt valid so we have to get to the prev cell
@@ -133,6 +140,7 @@ class Grid:
                         i -= 1 #take another step back to the prev cell
                     i -= 1 #take a step back to get to current cell after i + 1
             i += 1 #continue to the next cell (if the current cell is valid)
+        return True
             
     # =============================================================================
     # String repr
@@ -181,3 +189,4 @@ if __name__ == '__main__':
     print(g)
     g.solve_grid()
     print(g)
+    l = g.list_repr()
