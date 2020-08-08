@@ -51,7 +51,7 @@ def solve_grid():
         return jsonify({'Exception': str(e)}), status.BAD_REQUEST
     
     grid = Grid(list(grid.values()))
-    ans = grid.solve_grid()
+    grid.solve_grid()
     # if ans:
     return render_template("index.html", data=list(grid.list_repr())), status.OK
     # else:
