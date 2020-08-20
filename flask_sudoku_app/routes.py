@@ -55,4 +55,9 @@ def solve_grid():
     # if ans:
     return render_template("index.html", data=list(grid.list_repr())), status.OK
     # else:
-        
+
+
+
+   @app.route("/test", methods=['GET'])
+   def text():
+       return jsonify({'test': 'test'}), status.OK

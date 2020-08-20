@@ -1,4 +1,4 @@
-window.onload = function () {
+function createFirstTable() {
 	var table = document.getElementById("board_table");
 
 	for (j = 0; j < 3; j++) {
@@ -19,3 +19,5 @@ window.onload = function () {
 	}
 }
 
+
+window.onload = createFirstTable
