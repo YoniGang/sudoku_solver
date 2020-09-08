@@ -184,9 +184,9 @@ class Grid:
         
         
         
-if __name__ == '__main__':   
-    g = Grid(grid)
-    print(g)
-    g.solve_grid()
-    print(g)
-    l = g.list_repr()
+# if __name__ == '__main__':   
+#     g = Grid(grid)
+#     print(g)
+#     g.solve_grid()
+#     print(g)
+#     l = g.list_repr()

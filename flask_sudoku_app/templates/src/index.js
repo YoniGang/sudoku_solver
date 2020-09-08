@@ -9,6 +9,9 @@ function createFirstTable() {
 
 			for (i = 0; i < 9; i++) {
 				var td = document.createElement('td');
+				var input = document.createElement('input');
+				input.id = 'cell_input'
+				td.appendChild(input)
 				// td.innerText = '';
 				tr.appendChild(td);
 			}
@@ -21,3 +24,7 @@ function createFirstTable() {
 
 
 window.onload = createFirstTable
+
+function turnTableToJson() {
+	
+}
