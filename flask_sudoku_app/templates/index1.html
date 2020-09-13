@@ -9,10 +9,10 @@
       homescreen on Android. See https://developers.google.com/web/fundamentals/engage-and-retain/web-app-manifest/
     -->
 
-    <!-- <link rel="stylesheet" href={{ url_for('static', filename='css/style.css') }}> -->
-	<link rel="stylesheet" href='../static/css/style.css'}>
-	<script src="src/index.js"></script>
+	<!-- <link rel="stylesheet" href={{ url_for('static', filename='css/style.css') }}> -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<link rel="stylesheet" href='../static/css/style.css'}>
+	<script src="../static/src/index.js"></script>
       
     <!--
       Notice the use of %PUBLIC_URL% in the tags above.
@@ -26,8 +26,9 @@
     <title>Sudoku Solver</title>
   </head>
   <body>
-	<button onclick="location.href = '/get_grid';" id="resetButton" class="reset-button" >Reset Grid</button>
-  	<button onclick="turnTableToJson()" id="solveButton" class="solve-button" >Solve</button>
+	<button onclick="location.href = '/get_grid';" id="resetButton" class="control-button" >Reset Grid</button>
+	  <button onclick="turnTableToJson()" id="solveButton" class="control-button" >Solve</button>
+	  <button onclick="serverTest()" id="testButton" class="control-button" >test</button>
 	<div id="board">
 		<table id="board_table">
 		  <caption>Sudoku of the day</caption>

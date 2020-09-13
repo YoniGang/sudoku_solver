@@ -5,17 +5,17 @@ Created on Tue Jul 14 23:03:30 2020
 @author: yonig
 """
 
-# grid = [
-#     [7,8,0,4,0,0,1,2,0],
-#     [6,0,0,0,7,5,0,0,9],
-#     [0,0,0,6,0,1,0,7,8],
-#     [0,0,7,0,4,0,2,6,0],
-#     [0,0,1,0,5,0,9,3,0],
-#     [9,0,4,0,6,0,0,0,5],
-#     [0,7,0,3,0,0,0,1,2],
-#     [1,2,0,0,0,7,4,0,0],
-#     [0,4,9,2,0,6,0,0,7]
-# ]
+grid = [
+     [7,8,0,4,0,0,1,2,0],
+     [6,0,0,0,7,5,0,0,9],
+     [0,0,0,6,0,1,0,7,8],
+     [0,0,7,0,4,0,2,6,0],
+     [0,0,1,0,5,0,9,3,0],
+     [9,0,4,0,6,0,0,0,5],
+     [0,7,0,3,0,0,0,1,2],
+     [1,2,0,0,0,7,4,0,0],
+     [0,4,9,2,0,6,0,0,7]
+ ]
 
 # =============================================================================
 #                        The Cells class
@@ -108,6 +108,12 @@ class Grid:
     # =============================================================================
     def list_repr(self):
         return [self.get_row(i) for i in range(9)]
+
+    # =============================================================================
+    # This funtion returns list representation of the grid
+    # =============================================================================
+    def json_repr(self):
+        return {'r' + str(i) : self.get_row(i) for i in range(9)}
             
 
     # =============================================================================
@@ -121,9 +127,9 @@ class Grid:
             #and we didnt manage to solve the board, because we returnd to
             #the first none const cell, it was 9 and still there was no solution.
             if i < 0:
-                return False
-                # print('The Grid is not solvable. Please try anothe one')
-                # break
+#                return False
+                 print('The Grid is not solvable. Please try anothe one')
+                 break
             # print(i)
             #if we are here, it means that the cell was with the value
             #of 9, and the next cell wasnt valid so we have to get to the prev cell
@@ -184,9 +190,9 @@ class Grid:
         
         
         
-# if __name__ == '__main__':   
-#     g = Grid(grid)
-#     print(g)
-#     g.solve_grid()
-#     print(g)
+if __name__ == '__main__':   
+     g = Grid(grid)
+     print(g)
+     g.solve_grid()
+     print(g)
 #     l = g.list_repr()
