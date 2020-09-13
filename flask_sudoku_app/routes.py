@@ -58,6 +58,6 @@ def solve_grid():
 
 
 
-   @app.route("/test", methods=['GET'])
-   def text():
-       return jsonify({'test': 'test'}), status.OK
+@app.route("/test", methods=['GET'])
+def text():
+    return jsonify({'test': 'test'}), status.OK
