@@ -1,2 +1,2 @@
 .spyproject/**/*
-.flask_sudoku_app/__pycache__/**/*
+flask_sudoku_app/__pycache__/**/*
