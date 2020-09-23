@@ -1,4 +1,6 @@
-$(function() {
+$(createFirstGrid);
+
+function createFirstGrid() {
 	var table = document.getElementById("board_table");
 
 	for (j = 0; j < 3; j++) {
@@ -7,7 +9,6 @@ $(function() {
 			var tr = document.createElement('tr');
 			row = (y+j*3).toString();
 			tr.id = 'Table row: ' + row
-			// console.log(tr);
 
 			for (i = 0; i < 9; i++) {
 				var td = document.createElement('td');
@@ -24,12 +25,11 @@ $(function() {
 		// console.log(table)
 		table.appendChild(tbody);
 	}
-});
+}
 
 
-// window.onload = createFirstTable
 
-function turnTableToJson() {
+function turnGridToJson() {
 	var table = {}
 	for (row = 0; row < 9; row++){
 		rowArr = []
@@ -45,8 +45,8 @@ function turnTableToJson() {
 	return table;
 };
 
-function serverTest() {
-	const tableJson = turnTableToJson();
+function solveGrid() {
+	const tableJson = turnGridToJson();
 	// console.log(tableJson);
 	$.ajax({
 		type: 'POST',
@@ -54,14 +54,16 @@ function serverTest() {
 		url: '/api/solve_grid',
 		data: JSON.stringify(tableJson),
 		success: function(data) {
-			console.log(data);
-			fillTable(data)
+			// console.log(data);
+			fillGrid(data)
+		},
+		error: function(data) {
+			console.log('error', data)
 		}
 	});
 };
 
-function fillTable(data) {
-	console.log('in fill')
+function fillGrid(data) {
 	for (row = 0; row < 9; row++){
 		rowArr = []
 		for (col = 0; col < 9; col++) {
@@ -70,6 +72,23 @@ function fillTable(data) {
 											  row.toString());
 			// console.log(input.value)
 			input.innerText = data["r" + row][col];
+		}
+	}
+}
+
+
+function resetGrid() {
+	for (row = 0; row < 9; row++){
+		rowArr = []
+		for (col = 0; col < 9; col++) {
+			var td = document.getElementById('Table cell: ' + 
+											  col.toString() + ' ' +
+											  row.toString());
+			td.innerText = '';
+			var input = document.createElement('input');
+			input.id = 'cell_input';
+			input.type = 'number';
+			td.appendChild(input);
 		}
 	}
 }

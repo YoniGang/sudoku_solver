@@ -16,7 +16,7 @@ import json
 @app.route("/", methods=['GET'])
 def home():
     # reset_grid = [[0]*9]*9
-    return render_template("index1.html"), status.OK
+    return render_template("index.html"), status.OK
 
 @app.route("/api/get_grid", methods=['GET'])
 def get_grid():
@@ -69,7 +69,7 @@ def solve_grid():
     if is_solved:
         return jsonify(grid.json_repr()), status.OK
     
-    return jsonify({'Error': 'The Grid is not solvable. Please try anothe one'}), status.BAD_REQUEST
+    return jsonify({'Error': 'The Grid is not solvable. Please try another one'}), status.BAD_REQUEST
     # return jsonify(content), status.OK
 
 

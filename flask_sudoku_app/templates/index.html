@@ -9,7 +9,10 @@
       homescreen on Android. See https://developers.google.com/web/fundamentals/engage-and-retain/web-app-manifest/
     -->
 
-    <link rel="stylesheet" href={{ url_for('static', filename='css/style.css') }}>
+	<!-- <link rel="stylesheet" href={{ url_for('static', filename='css/style.css') }}> -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<link rel="stylesheet" href='../static/css/style.css'}>
+	<script src="../static/src/index.js"></script>
       
     <!--
       Notice the use of %PUBLIC_URL% in the tags above.
@@ -22,41 +25,120 @@
     -->
     <title>Sudoku Solver</title>
   </head>
+  <!-- <h1>Sudoku</h1> -->
   <body>
-	<button onclick="location.href = '/get_grid';" id="myButton" class="float-left submit-button" >Reset Grid</button>
-  	<button onclick="location.href = '/solve_grid';" id="myButton" class="float-left submit-button" >Solve</button>
 	<div id="board">
-		<table>
-		  <caption>Sudoku of the day</caption>
+		<table id="board_table">
+		  <caption>Sudoku</caption>
 			  <colgroup>
 				<col>
 				<col>
 				<col>
-				<colgroup>
-				  <col>
-				  <col>
-				  <col>
-				  <colgroup>
-					<col>
-					<col>
-					<col>
-						
-					{% for j in range(9) %}
-						{%if j%3 == 0%}
-							<tbody>
-						{%endif%}
-							<tr>
-							{% for i in range(9) %}
-								{%if data[j][i] != 0%}
-									<td>{{ data[j][i] }}
-								{%else%}
-									<td>
-										<!-- <input id="cell_input" maxlength=1> -->
-								{%endif%}
-							{% endfor %}
-					{% endfor %}
+        	  <colgroup>
+				<col>
+				<col>
+				<col>
+			  <colgroup>
+        		<col>
+				<col>
+				<col>
+			  <!-- <tbody> -->
+				<!-- <tr> -->
+					<!-- <td> -->
+					<!-- <td> -->
+					<!-- <td> -->
+					<!-- <td> -->
+					<!-- <td> -->
+					<!-- <td> -->
+					<!-- <td> -->
+					<!-- <td> -->
+					<!-- <td> -->
+				<!-- <tr> -->
+					<!-- <td> -->
+					<!-- <td> -->
+					<!-- <td> -->
+					<!-- <td> -->
+					<!-- <td> -->
+					<!-- <td> -->
+					<!-- <td> -->
+					<!-- <td> -->
+					<!-- <td> -->
+				<!-- <tr> -->
+					<!-- <td> -->
+					<!-- <td> -->
+					<!-- <td> -->
+					<!-- <td> -->
+					<!-- <td> -->
+					<!-- <td> -->
+					<!-- <td> -->
+					<!-- <td> -->
+					<!-- <td> -->
+			<!-- <tbody> -->
+				<!-- <tr> -->
+					<!-- <td> -->
+					<!-- <td> -->
+					<!-- <td> -->
+					<!-- <td> -->
+					<!-- <td> -->
+					<!-- <td> -->
+					<!-- <td> -->
+					<!-- <td> -->
+					<!-- <td> -->
+				<!-- <tr> -->
+					<!-- <td> -->
+					<!-- <td> -->
+					<!-- <td> -->
+					<!-- <td> -->
+					<!-- <td> -->
+					<!-- <td> -->
+					<!-- <td> -->
+					<!-- <td> -->
+					<!-- <td> -->
+				<!-- <tr> -->
+					<!-- <td> -->
+					<!-- <td> -->
+					<!-- <td> -->
+					<!-- <td> -->
+					<!-- <td> -->
+					<!-- <td> -->
+					<!-- <td> -->
+					<!-- <td> -->
+					<!-- <td> -->
+			<!-- <tbody> -->
+				<!-- <tr> -->
+					<!-- <td> -->
+					<!-- <td> -->
+					<!-- <td> -->
+					<!-- <td> -->
+					<!-- <td> -->
+					<!-- <td> -->
+					<!-- <td> -->
+					<!-- <td> -->
+					<!-- <td> -->
+				<!-- <tr> -->
+					<!-- <td> -->
+					<!-- <td> -->
+					<!-- <td> -->
+					<!-- <td> -->
+					<!-- <td> -->
+					<!-- <td> -->
+					<!-- <td> -->
+					<!-- <td> -->
+					<!-- <td> -->
+				<!-- <tr> -->
+					<!-- <td> -->
+					<!-- <td> -->
+					<!-- <td> -->
+					<!-- <td> -->
+					<!-- <td> -->
+					<!-- <td> -->
+					<!-- <td> -->
+					<!-- <td> -->
+					<!-- <td> -->
 				 
 		</table>
 	</div>
+	<button onclick="resetGrid()" id="resetButton" class="control-button" >Reset Grid</button>
+	<button onclick="solveGrid()" id="solveButton" class="control-button" >Solve</button>
   </body>
 </html>

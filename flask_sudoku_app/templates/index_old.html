@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="theme-color" content="#000000">
+    <!--
+      manifest.json provides metadata used when your web app is added to the
+      homescreen on Android. See https://developers.google.com/web/fundamentals/engage-and-retain/web-app-manifest/
+    -->
+
+    <link rel="stylesheet" href={{ url_for('static', filename='css/style.css') }}>
+      
+    <!--
+      Notice the use of %PUBLIC_URL% in the tags above.
+      It will be replaced with the URL of the `public` folder during the build.
+      Only files inside the `public` folder can be referenced from the HTML.
+
+      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
+      work correctly both with client-side routing and a non-root public URL.
+      Learn how to configure a non-root public URL by running `npm run build`.
+    -->
+    <title>Sudoku Solver</title>
+  </head>
+  <body>
+	<button onclick="location.href = '/get_grid';" id="myButton" class="float-left submit-button" >Reset Grid</button>
+  	<button onclick="location.href = '/solve_grid';" id="myButton" class="float-left submit-button" >Solve</button>
+	<div id="board">
+		<table>
+		  <caption>Sudoku of the day</caption>
+			  <colgroup>
+				<col>
+				<col>
+				<col>
+				<colgroup>
+				  <col>
+				  <col>
+				  <col>
+				  <colgroup>
+					<col>
+					<col>
+					<col>
+						
+					{% for j in range(9) %}
+						{%if j%3 == 0%}
+							<tbody>
+						{%endif%}
+							<tr>
+							{% for i in range(9) %}
+								{%if data[j][i] != 0%}
+									<td>{{ data[j][i] }}
+								{%else%}
+									<td>
+										<!-- <input id="cell_input" maxlength=1> -->
+								{%endif%}
+							{% endfor %}
+					{% endfor %}
+				 
+		</table>
+	</div>
+  </body>
+</html>

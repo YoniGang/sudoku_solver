@@ -5,8 +5,10 @@ Created on Tue Jul 14 23:03:30 2020
 @author: yonig
 """
 
+from collections import Counter
+
 grid = [
-     [7,8,0,4,0,0,1,2,0],
+     [7,8,0,4,0,1,1,2,0],
      [6,0,0,0,7,5,0,0,9],
      [0,0,0,6,0,1,0,7,8],
      [0,0,7,0,4,0,2,6,0],
@@ -98,28 +100,49 @@ class Grid:
                 if cell.part == part and cell != except_cell]
     
     # =============================================================================
-    # This funtion returns all the cells indexes that are not const
+    # This function returns all the cells indexes that are not const
     # =============================================================================
     def get_none_const_cells_indexes(self):
         return [ind for ind, cell in enumerate(self.grid_cells)
                 if not cell.is_const]
     # =============================================================================
-    # This funtion returns list representation of the grid
+    # This function returns list representation of the grid
     # =============================================================================
     def list_repr(self):
         return [self.get_row(i) for i in range(9)]
 
     # =============================================================================
-    # This funtion returns list representation of the grid
+    # This function returns list representation of the grid
     # =============================================================================
     def json_repr(self):
         return {'r' + str(i) : self.get_row(i) for i in range(9)}
+    
+    # =============================================================================
+    # This function check if the grid is valid
+    # =============================================================================
+    def check_grid_validity(self):
+        for i in range(9):
+            row = self.get_row(i)
+            col = self.get_col(i)
+            part = self.get_part((int(i/3),i%3))
             
+            #Check if the row, the col or the part, has number different then 0
+            #that has more that one appearance
+            if max(Counter(filter(lambda x: x!=0, row)).values(), default=0) > 1 \
+                or max(Counter(filter(lambda x: x!=0, col), default=0).values()) > 1 \
+                or max(Counter(filter(lambda x: x!=0, part), default=0).values()) > 1:
+                    return False
+            
+            
+        return True
 
     # =============================================================================
-    # This funtion solve the grid using backtracking algorithm
+    # This function solve the grid using backtracking algorithm
     # =============================================================================
     def solve_grid(self):
+        if not self.check_grid_validity():
+            # print('The Grid is not valid. Please try another one')
+            return False
         ind_list = self.get_none_const_cells_indexes() #list of indexes of all not const cells
         i = 0
         while i < len(ind_list):
@@ -127,9 +150,8 @@ class Grid:
             #and we didnt manage to solve the board, because we returnd to
             #the first none const cell, it was 9 and still there was no solution.
             if i < 0:
-#                return False
-                 print('The Grid is not solvable. Please try anothe one')
-                 break
+                 # print('The Grid is not solvable. Please try another one')
+                 return False
             # print(i)
             #if we are here, it means that the cell was with the value
             #of 9, and the next cell wasnt valid so we have to get to the prev cell
