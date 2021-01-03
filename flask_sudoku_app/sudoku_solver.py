@@ -8,16 +8,18 @@ Created on Tue Jul 14 23:03:30 2020
 from collections import Counter
 
 grid = [
-     [7,8,0,4,0,1,1,2,0],
-     [6,0,0,0,7,5,0,0,9],
+     [7,8,0,0,0,0,1,2,0],
+     [6,0,0,0,0,0,0,0,9],
      [0,0,0,6,0,1,0,7,8],
      [0,0,7,0,4,0,2,6,0],
      [0,0,1,0,5,0,9,3,0],
      [9,0,4,0,6,0,0,0,5],
-     [0,7,0,3,0,0,0,1,2],
-     [1,2,0,0,0,7,4,0,0],
+     [0,0,0,3,0,0,0,1,2],
+     [0,2,0,0,0,7,4,0,0],
      [0,4,9,2,0,6,0,0,7]
  ]
+
+empty_grid = [[0]*9]*9
 
 # =============================================================================
 #                        The Cells class
@@ -169,12 +171,52 @@ class Grid:
                     i -= 1 #take a step back to get to current cell after i + 1
             i += 1 #continue to the next cell (if the current cell is valid)
         return True
-            
+    
+    # =============================================================================
+    # This function counts the number of solutions of the grid,
+    # using backtracking algorithm.
+    # =============================================================================
+    def count_solve_grid(self):
+        solutions_counter = 0
+        if not self.check_grid_validity():
+            # print('The Grid is not valid. Please try another one')
+            return 0
+        ind_list = self.get_none_const_cells_indexes() #list of indexes of all not const cells
+        i = 0
+        while True:
+            #If we got here, that means that we tried all possible solutions
+            #and we didnt manage to solve the board, because we returnd to
+            #the first none const cell, it was 9 and still there was no solution.
+            if i < 0:
+                 # print('The Grid is not solvable. Please try another one')
+                 break
+            # print(i)
+            #if we are here, it means that the cell was with the value
+            #of 9, and the next cell wasnt valid so we have to get to the prev cell
+            if self.grid_cells[ind_list[i]].num == 9:
+                self.grid_cells[ind_list[i]].num = 0 #reset the cell
+                i -= 2 #take another step back to the prev cell
+            else:
+                self.grid_cells[ind_list[i]].num += 1
+                #check if the number is valid
+                if not self.grid_cells[ind_list[i]].check_validity():
+                    #check if we tried all possible numbers
+                    if self.grid_cells[ind_list[i]].num == 9:
+                        self.grid_cells[ind_list[i]].num = 0 #reset the cell
+                        i -= 1 #take another step back to the prev cell
+                    i -= 1 #take a step back to get to current cell after i + 1
+            i += 1 #continue to the next cell (if the current cell is valid)
+            if i == len(ind_list):
+                # print(self)
+                i -= 1
+                solutions_counter += 1
+                
+        return solutions_counter
+    
     # =============================================================================
     # String repr
     # =============================================================================
     def __str__(self):
-
         final_string = '―――'*9 + '―' + '\n'
         prev_row = 0
         prev_part = (0,0)
@@ -209,12 +251,17 @@ class Grid:
         final_string += '―――'*9 + '―'
         
         return final_string
+    
+    
+    # def generate_new_grid(self):
+        
         
         
         
 if __name__ == '__main__':   
      g = Grid(grid)
      print(g)
-     g.solve_grid()
+     count = g.count_solve_grid()
+     print(count)
      print(g)
 #     l = g.list_repr()
